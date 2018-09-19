@@ -1,0 +1,20 @@
+.login-container{
+    padding:30px;
+    background: #fafafa url("../../assets/registration.jpg") no-repeat;
+    height: calc(100vh - 2.5rem);
+}
+
+.login-group *{
+    display: block;
+    width: 100%;
+    margin-top: 35px;
+}
+
+.login-group a{
+    margin-top: 20px !important;
+    text-align: center;
+}
+
+.signup{
+    color:#01573c;
+}

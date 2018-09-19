@@ -1,0 +1,63 @@
+<app-header-step backTo="stepboard"></app-header-step>
+<div class="step-container" style="margin-top: 35px">
+    <div class="row flex-items-xs-center flex-items-xs-middle">
+        <div class="col-xs-11">
+            <div class="card">
+                <div class="card-header">
+                    Objective, Fact, And Problem Finding <span *ngIf="isComplete" class="badge badge-success"><clr-icon shape="check-circle"></clr-icon>selesai</span>
+                </div>
+                <div class="card-block">
+                    <div class="form" *ngIf="!isCoach && !isComplete">
+                        <b>Jelaskan objektif, fakta yang Anda analisa, serta root cause/ root problems yang perlu Anda atasi
+                            terkait project :</b>
+                        <textarea placeholder="Isi identifikasi masalah" [(ngModel)]="longAnswer"></textarea>
+                        <b>Silahkan unggah hasil
+                            <i>Problem Identification</i> Anda</b>
+                        <div class="upload-btn-wrapper">
+                            <button class="btn-file" (click)="fileInput.click()">
+                                <clr-icon shape="upload" size="23"></clr-icon> Unggah Dokumen...</button>
+                            <input type="file" accept="application/pdf" #fileInput name="pifile" (change)="readUrl($event)" />
+                        </div>
+                    </div>
+                    <div class="card-text">
+                        <div>
+                            <pdf-viewer (after-load-complete)="afterLoadComplete($event)" [src]="pdfSrc" [show-all]="false" [render-text]="false" style="display: block;"
+                                [fit-to-page]="true" [(page)]="page"></pdf-viewer>
+                            <button type="button" class="btn btn-icon btn-primary" style="float: left;" (click)="page=page-1" *ngIf="page>1">
+                                <clr-icon class="is-solid" shape="rewind"></clr-icon>
+                            </button>
+                            <span style="font-size: 9px; font-style: italic">Hal. {{page}} dari {{totalPages}}</span>
+                            <button type="button" class="btn btn-icon btn-primary" style="float: right;" (click)="page=page+1" *ngIf="page<totalPages">
+                                <clr-icon class="is-solid" shape="fast-forward"></clr-icon>
+                            </button>
+                        </div>
+                        <br />
+                        <div style="background: #ACFFD2; padding:5px;border-radius: 5px;">
+                            <b>
+                                <clr-icon shape="pinboard" class="is-solid"></clr-icon> Objektif fakta yang sudah dianalisa,
+                                serta root cause/ root problems yang perlu diatasi</b>
+                            <br/>
+                            <span *ngIf="pi.Description">{{pi.Description}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer" *ngIf="!isCoach && !isComplete">
+                    <div *ngIf="traffic && progress > 0" class="progress top success" style="position: absolute; top: 70%; left: 0; z-index: 31000;">
+                        <progress value="{{progress}}" max="100"></progress>
+                    </div>
+                    <button class="btn btn-primary btn-block" (click)="onSubmit()">Kirim</button>
+                </div>
+            </div>
+            <div class="card">
+                <app-comment DocType="1"></app-comment>
+            </div>
+            <br/>
+            <div class="card" *ngIf="isCoach">
+                <textarea [disabled]="isComplete ? 'disabled' : null" placeholder="Kesepakatan" [(ngModel)]="longAnswerCommit"></textarea>
+                <button [disabled]="isComplete ? 'disabled' : null" class="btn btn-primary btn-icon btn-block" (click)="onComplete()">
+                    <clr-icon shape="check" size="26"></clr-icon>Complete</button>
+            </div>
+            <br/>
+        </div>
+    </div>
+</div>

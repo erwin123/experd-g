@@ -1,0 +1,16 @@
+<div class="login-container">
+    <form class="login" (ngSubmit)="ganti()">
+      <h1 class="welcome">Ganti Password</h1>
+      Experd Serve
+      <div class="login-group">
+        <input class="password" type="password" id="oldpassword" placeholder="Password Lama"
+          name="oldpassword" [(ngModel)]="oldpassword">
+        <input class="password" type="password" id="newpassword" placeholder="Password Baru"
+          name="newpassword" [(ngModel)]="newpassword">
+        <input class="password" type="password" id="cnewpassword" placeholder="Konfirmasi Password Baru"
+          name="cnewpassword" [(ngModel)]="cnewpassword">
+          
+        <button type="button" (click)="ganti()" class="btn btn-primary btn-block">GANTI</button>
+      </div>
+    </form>
+  </div>

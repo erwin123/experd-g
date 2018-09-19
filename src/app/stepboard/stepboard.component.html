@@ -1,0 +1,31 @@
+<app-header-step backTo="coachy" *ngIf="isCoach"></app-header-step>
+<div class="board-container">
+  <div class="row flex-items-xs-left flex-items-xs-middle" style="padding-top:55px;">
+    <div class="col-xs-11 stepboard no-float">
+      <a routerLink="/main/stepone" class="btn">
+        <clr-icon shape="search" class="is-solid" size="24"></clr-icon> Objective-Fact-Problem
+        <span class="arrow"> ❯</span>
+      </a>
+      <a [ngClass]="{'btn-disable': pi.Complete === '0' && !isCoach}" routerLink="/main/steptwo" class="btn">
+        <clr-icon shape="file-settings" class="is-solid" size="24"></clr-icon> Idea-Solution
+        <span class="arrow"> ❯</span>
+      </a>
+      <a [ngClass]="{'btn-disable': soSkip === '0' && !isCoach}" routerLink="/main/execone" class="btn">
+        <clr-icon shape="lightbulb" class="is-solid" size="24"></clr-icon> Action 1
+        <span class="arrow"> ❯</span>
+      </a>
+      <a [ngClass]="{'btn-disable': soSkip === '0' && !isCoach}" routerLink="/main/exectwo" class="btn">
+        <clr-icon shape="bolt" class="is-solid" size="24"></clr-icon> Action 2
+        <span class="arrow"> ❯</span>
+      </a>
+      <a [ngClass]="{'btn-disable': soSkip === '0' && !isCoach}" routerLink="/main/execthree" class="btn">
+        <clr-icon shape="wrench" class="is-solid" size="24"></clr-icon> Action 3
+        <span class="arrow"> ❯</span>
+      </a>
+      <a routerLink="/main/summary" class="btn">
+        <clr-icon shape="tasks" class="is-solid" size="24"></clr-icon> Summary
+        <span class="arrow"> ❯</span>
+      </a>
+    </div>
+  </div>
+</div>

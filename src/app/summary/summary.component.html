@@ -1,0 +1,80 @@
+<app-header-step backTo="stepboard"></app-header-step>
+<div class="summary-container" style="margin-top: 30px">
+  <div class="row flex-items-xs-center flex-items-xs-middle">
+    <div class="col-xs-11">
+      <div class="card">
+        <div class="card-header">
+          <clr-icon shape="search" size="22"></clr-icon> Objective, Fact, And Problem Finding
+        </div>
+        <div class="card-img">
+          <img src="../../assets/pi.jpg">
+        </div>
+        <div class="card-block">
+          <div class="card-text">
+            <b>
+              <clr-icon shape="pinboard" class="is-solid"></clr-icon> Identifikasi masalah sebelumnya
+            </b>
+            <br/>
+            <span *ngIf="pi.Description">{{pi.Description}}</span>
+            <br/><br/>
+            <b>
+              <clr-icon shape="talk-bubbles"></clr-icon> Kesepakatan sebelumnya
+            </b>
+            <br/>
+            <span *ngIf="pi.Commit">{{pi.Commit}}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <clr-icon shape="lightbulb" size="22"></clr-icon> Idea & Solution
+        </div>
+        <div class="card-img">
+          <img src="../../assets/so2.jpg">
+        </div>
+        <div class="card-block">
+          <div class="card-text">
+            <div *ngFor="let solution of solutions; let i = index">
+              <div class="the-solution" style="box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.1);padding: 5px; margin-bottom:10px;border: 1px #ccc solid;border-radius: 5px;">
+
+                <div class="solution" style="background: honeydew;color: #01573c;padding: 5px;">
+                  <b>
+                    <clr-icon shape="note" class="is-solid"></clr-icon> Solusi {{i+1}}</b>
+                  <br/> {{solution.Solution}}
+                </div>
+                <div class="target" style="background:#01573c; color:honeydew;padding: 5px;">
+                  <b>
+                    <clr-icon shape="event" class="is-solid"></clr-icon> Target</b>
+                  <br/> {{solution.Target}}
+                </div>
+                <div class="deadline" style="background:ivory;color:#744100;padding: 5px;">
+                  <clr-icon shape="calendar" class="has-alert is-solid"></clr-icon> {{solution.Deadline | date: 'dd/MM/yyyy'}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <clr-icon shape="nvme" size="22"></clr-icon> Action
+        </div>
+        <div class="card-img">
+          <img src="../../assets/execsummary.gif">
+        </div>
+        <div class="card-block">
+          <div class="card-text">
+            <app-execsummary step="1" executionTitle="Action 1"></app-execsummary>
+            <br/>
+            <app-execsummary step="2" executionTitle="Action 2"></app-execsummary>
+            <br/>
+            <app-execsummary step="3" executionTitle="Action 3"></app-execsummary>
+          </div>
+        </div>
+      </div>
+      <br/>
+
+    </div>
+  </div>
+</div>

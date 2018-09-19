@@ -1,0 +1,35 @@
+<div class="landing-container">
+  <app-carousel [banners] = 'banners'></app-carousel>
+  <app-drawer></app-drawer>
+  <div class="main-quote">
+    The purpose of training is to tighten up the slack, toughen the body, and polish the spirit.
+      <br/> - Morihei Ueshiba
+  </div>
+  <div class="row flex-items-xs-center flex-items-xs-middle">
+    <div class="col-xs-10" *ngFor="let item of items">
+      <div class="card" id="{{item.name}}">
+        <div class="card-header">
+          {{item.name}}
+        </div>
+        <div class="card-block">
+          <div class="card-text">
+            {{item.desc}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br/>
+</div>
+
+<clr-modal [(clrModalOpen)]="opened">
+  <h3 class="modal-title">Izinkan kami memberi pesan notifikasi</h3>
+  <div class="modal-body">
+      <a (click)="okPermission()" class="btn btn-success btn-sm btn-block" style="text-align: center !important;">
+          Ya, Izinkan
+      </a>
+      <a (click)="opened = false" class="btn btn-success-outline btn-sm btn-block" style="text-align: center !important;">
+          Tidak
+      </a>
+  </div>
+</clr-modal>

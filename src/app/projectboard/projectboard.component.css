@@ -1,0 +1,46 @@
+.board-container {
+    background: url('../../assets/stepbg.jpg')no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: calc(100vh - 2.5rem);
+}
+
+.stepboard a {
+    width: 250px;
+    margin: 10px;
+}
+
+.btn {
+    border-color: #fff;
+    color: #fff;
+    border-radius: 0%;
+    text-align: left;
+}
+
+.btn:hover {
+    background-color: transparent
+}
+
+.btn:active {
+    background: #01573c;
+}
+
+.btn-disable {
+    border-color: #777 !important;
+    color: #777 !important;
+}
+
+.arrow {
+    float: right;
+}
+
+.title {
+    color: #fff;
+    font-size: 18px;
+    width: 90%;
+    display: block;
+    margin-left: 10%;
+    margin-bottom: 10px;
+}

@@ -1,0 +1,14 @@
+<app-header-step backTo="stepboard"></app-header-step>
+<div class="row" style="height: 100vh;margin-top: 35px;">
+  <div class="col-lg-5 col-md-8 col-sm-12 col-xs-12">
+    <div *ngFor="let solution of solutions; let i = index">
+      <app-solution [complete]="complete" actionOrder="{{i+1}}" documentCode="{{solution.DocumentCode}}" solutionTitle="Idea, Solution, And Acceptance (Solution {{i+1}})"></app-solution>
+    </div>
+    <div class="card">
+        <app-comment DocType="2"></app-comment>
+    </div>
+    <br/>
+    <button *ngIf="isCoach" [disabled]="complete ? 'disabled' : null" class="btn btn-primary btn-icon btn-block" (click)="onComplete()"><clr-icon shape="check" size="26"></clr-icon>Complete</button>
+    <br/>
+  </div>
+</div>

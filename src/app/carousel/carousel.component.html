@@ -1,0 +1,11 @@
+<ngu-carousel [inputs]="carouselBanner" (onMove)="onmoveFn($event)">
+  <ngu-item NguCarouselItem class="bannerStyle" *ngFor="let banner of banners">
+    <h1>
+      <img src="{{banner.BannerPath}}" alt="" title="{{banner.BannerDesc}}">
+      <div class="banner-desc">{{banner.BannerDesc}}</div>
+    </h1>
+    
+  </ngu-item>
+  <button NguCarouselPrev class='directors leftRs'></button>
+  <button NguCarouselNext class='directors rightRs'></button>
+</ngu-carousel>

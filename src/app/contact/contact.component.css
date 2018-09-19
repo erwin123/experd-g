@@ -1,0 +1,5 @@
+.contact-container{
+    padding:30px;
+    background: transparent url("../../assets/contact.jpg") no-repeat;
+    height: calc(100vh - 2.5rem);
+}

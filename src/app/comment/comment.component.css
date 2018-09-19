@@ -1,0 +1,27 @@
+.txtarea{
+    margin: 6px auto;
+}
+
+.txtarea:focus{
+    overflow: auto;
+    outline: none;
+
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+.chat-sender-info{
+    font-size: 10px;
+}
+
+.chat-sender{
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.chat-history{
+    background: #ACFFD2;
+    padding: 5px;
+    border-radius: 5px;
+}

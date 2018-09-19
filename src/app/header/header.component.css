@@ -1,0 +1,15 @@
+.header-nav{
+    font-size: 18px !important;
+}
+
+.header-1{
+    background: -webkit-linear-gradient(45deg, #01573c 0%,#01573c 59%,#01573c 59%,#027754 71%,#01573c 81%,#027754 90%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(45deg, #01573c 0%,#01573c 59%,#01573c 59%,#027754 71%,#01573c 81%,#027754 90%);
+}
+
+.menus a{
+    margin: 15px;
+    color:black;
+    vertical-align: middle;
+    cursor: pointer;
+}

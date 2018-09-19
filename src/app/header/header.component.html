@@ -1,0 +1,45 @@
+<clr-header class="header-1">
+    <div class="branding" style="background-color:#01573c;">
+        <a routerLink="/main/anchor" class="nav-link">
+            <img src="assets/logo.jpg" alt="" title="exp-logo">
+        </a>
+    </div>
+    <div class="header-actions" *ngIf="isLogin">
+        <clr-dropdown>
+            <button class="nav-icon" clrDropdownTrigger>
+                <clr-icon shape="user" class="is-solid"></clr-icon>
+                <clr-icon shape="caret down"></clr-icon>
+            </button>
+            <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+                <a routerLink="/main/chpwd" style="color:#000" class="nav-link" clrDropdownItem>Ganti Kata Sandi</a>
+                <a (click)="logout()" clrDropdownItem>Keluar</a>
+            </clr-dropdown-menu>
+        </clr-dropdown>
+    </div>
+</clr-header>
+<div *ngIf="traffic" class="progress loop success" style="background: #fff !important; font-size: 3px; position: absolute; z-index: 99;">
+    <progress></progress>
+</div>
+<nav class="header-nav menus" [clr-nav-level]="1">
+    <a *ngIf="!isLogin" routerLink="/main/login" class="nav-link">
+        <clr-icon shape="login" size="18"></clr-icon> Masuk
+    </a>
+    <a routerLink="/main/landing" class="nav-link">
+        <clr-icon shape="home" class="is-solid" size="18"></clr-icon> Beranda
+    </a>
+    <a *ngIf="isLogin && !isCoach" routerLink="/main/stepboard" class="nav-link">
+        <clr-icon shape="list" class="is-solid"></clr-icon> Step Saya
+    </a>
+    <a *ngIf="isLogin && isCoach" routerLink="/main/projectboard" class="nav-link">
+        <clr-icon shape="list" class="is-solid"></clr-icon> List Project
+    </a>
+    <a *ngIf="isLogin && isCoach && isProjectSelected" routerLink="/main/coachy" class="nav-link">
+        <clr-icon shape="list" class="is-solid"></clr-icon> List Coach
+    </a>
+    <a routerLink="/main/contact" class="nav-link">
+        <clr-icon shape="phone-handset" class="is-solid" size="18"></clr-icon> Hubungi Kami
+    </a>
+    <a *ngIf="isLogin" (click)="logout()" class="nav-link">
+        <clr-icon shape="list" class="is-solid"></clr-icon> Keluar
+    </a>
+</nav>

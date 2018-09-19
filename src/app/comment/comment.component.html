@@ -1,0 +1,27 @@
+<div class="container-chat">
+  <div class="row">
+    <div class="col-sm-10 col-xs-10" style="padding-right: 0 !important;">
+      <textarea [attr.disabled]="lock ? 'disabled' : null" style="height: 36px;max-height: 36px" class="txtarea" placeholder="Isi komentar" rows="1" [(ngModel)]="Chat.TheText"></textarea>
+    </div>
+    <div class="col-sm-2 col-xs-2" style="padding-left: 0 !important;">
+      <button [attr.disabled]="lock ? 'disabled' : null" (click)="onSubmit()" [disabled]="!Chat.TheText" type="button" class="btn btn-icon btn-primary">
+        <clr-icon shape="deploy" class="is-solid"></clr-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12 col-xs-12">
+      <div *ngFor="let i of Chats">
+        <div class="chat-sender-info">
+          <span class="chat-sender">{{i.CreatedBy}}</span> pada tanggal
+          <span class="chat-date">{{i.CreatedDate | date: 'dd/MM/yyyy HH:mm:ss'}}</span>
+        </div>
+        <div class="chat-history">
+          {{i.TheText}}
+        </div>
+        <br/>
+      </div>
+    </div>
+  </div>
+</div>

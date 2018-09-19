@@ -1,0 +1,8 @@
+<div class="row flex-items-xs-center flex-items-xs-middle">
+  <div class="col-xs-5" *ngFor="let item of items">
+    <a (click)="triggerScrollTo(item.name)">
+      <clr-icon [attr.shape]="item.icon" class="is-solid"></clr-icon>
+      <br/> {{item.name}}
+    </a>
+  </div>
+</div>

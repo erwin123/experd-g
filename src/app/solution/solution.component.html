@@ -1,0 +1,21 @@
+<div class="card">
+  <div class="card-header">
+    {{solutionTitle}}
+  </div>
+  <div class="card-block">
+    <div class="card-text">
+      <label *ngIf="solution.Solution">Solusi</label>
+      <textarea [disabled]="isCoach || complete ? 'disabled' : null" type="text" id="formFields_1" placeholder="Solusi" name="solusi" [(ngModel)]="solution.Solution"></textarea>
+      <label *ngIf="solution.Target">Target</label>
+      <textarea  [disabled]="isCoach || complete ? 'disabled' : null" type="text" id="formFields_2" placeholder="Target" name="target" [(ngModel)]="solution.Target"></textarea>
+      <!-- <input [disabled]="isCoach ? 'disabled' : null" type="text" id="formFields_1" placeholder="Solusi" name="solusi" [(ngModel)]="solution.Solution">
+      <input [disabled]="isCoach ? 'disabled' : null" type="text" id="formFields_2" placeholder="Target" name="target" [(ngModel)]="solution.Target"> -->
+      <label *ngIf="solution.Deadline">Deadline</label>
+      <my-date-picker [disabled]="isCoach || complete ? 'disabled' : null" [(ngModel)]="solution.Deadline" placeholder="Deadline" [options]="myDatePickerOptions" (dateChanged)="onDateChanged($event)"></my-date-picker>
+      <div *ngIf="error" style="color:red;">{{errorMsg}}</div>
+    </div>
+  </div>
+  <div class="card-footer" *ngIf="!isCoach">
+    <button [disabled]="isCoach || complete ? 'disabled' : null" class="btn btn-primary btn-md btn-block" (click)="submit()">Simpan</button>
+  </div>
+</div>

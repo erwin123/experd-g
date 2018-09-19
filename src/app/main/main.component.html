@@ -1,0 +1,11 @@
+<div class="content-container">
+    <clr-main-container #container>
+
+        <app-header></app-header>
+        <main class="content-area" [@routerTransition]="page.activatedRouteData.state">
+            <router-outlet #page="outlet"></router-outlet>
+        </main>
+        <!-- <app-footer></app-footer> -->
+
+    </clr-main-container>
+</div>

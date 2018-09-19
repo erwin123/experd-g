@@ -1,0 +1,17 @@
+<div class="login-container">
+  <form class="login" (ngSubmit)="login()">
+      <h1 class="welcome">Masuk Aplikasi</h1>
+          Experd Guide
+      <div class="login-group">
+          <input [attr.disabled]="lock ? 'disabled' : null" class="username"
+          type="text" id="login_username" placeholder="Username" name="username" [(ngModel)]="username">
+          <input [attr.disabled]="lock ? 'disabled' : null" class="password"
+          type="password" id="login_password" placeholder="Password" name="password" [(ngModel)]="password">
+          <div *ngIf="hasError" style="color:red">
+              {{message}}
+          </div>
+          <button [attr.disabled]="lock ? 'disabled' : null" type="button" (click)="login()" class="btn btn-primary btn-block">Masuk</button>
+          <a href="javascript://" class="signup">Daftar</a>
+      </div>
+  </form>
+</div>

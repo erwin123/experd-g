@@ -1,0 +1,38 @@
+<app-header-step backTo="projectboard"></app-header-step>
+<div class="board-container">
+  <div class="row flex-items-xs-left flex-items-xs-middle" style="padding-top:55px;">
+    <div class="title">Coachee&nbsp;&nbsp;
+      <button (click)="onMoveClick(true)" *ngIf="!modeMove" class="btn btn-primary btn-sm">
+        <clr-icon shape="plus"></clr-icon> Transfer</button>
+      <button (click)="onMoveClick(false)" *ngIf="modeMove" class="btn btn-danger btn-sm">
+        <clr-icon shape="times"></clr-icon> Batal</button>
+      <button (click)="onMoveAction()" *ngIf="modeMove" class="btn btn-icon btn-primary btn-sm">
+        <clr-icon shape="fast-forward"></clr-icon>
+      </button>
+    </div>
+    <div class="col-xs-11 stepboard no-float" *ngFor="let obj of users;let i = index">
+      <div *ngIf="modeMove" class="checkbox" style="display:inline !important;">
+        <input type="checkbox" (change)="changeToMove($event, obj)" [id]="i" [checked]="obj.CheckToMove">
+        <label for="{{i}}"></label>
+      </div>
+      <a (click)="onClick(obj.UserCode)" class="btn">
+        <clr-icon shape="user" class="is-solid" size="24"></clr-icon> {{obj.Name}}
+        <span class="arrow"> ❯</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<clr-modal [(clrModalOpen)]="opened">
+  <h3 class="modal-title">Pilih Coach :</h3>
+  <div class="modal-body">
+    <label *ngIf="!sending">Alasan harus diisi</label>
+    <label *ngIf="sending" style="color:red; font-size: 16px;">Sedang mentransfer, harap tunggu...</label>
+    <textarea placeholder="Contoh : Saya sibuk..." [(ngModel)]="reason"></textarea>
+    <div *ngFor="let objC of coach;let i = index">
+      <a  [ngClass]="{'btn-disable': !reason}" (click)="onSelectCoach(objC)" class="btn btn-success btn-sm btn-block" style="text-align: center !important;">
+        {{objC.Name}}
+      </a>
+    </div>
+  </div>
+</clr-modal>

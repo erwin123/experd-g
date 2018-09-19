@@ -1,0 +1,11 @@
+<div class="board-container">
+  <div class="row flex-items-xs-left flex-items-xs-middle" style="padding-top:35px;">
+    <div class="title">Project List</div>
+    <div class="col-xs-11 stepboard no-float" *ngFor="let obj of projectList">
+      <a (click)="onClick(obj.ProjectCode)" class="btn">
+        <clr-icon shape="list" class="is-solid" size="24"></clr-icon> {{obj.Name}}
+        <span class="arrow"> ❯</span>
+      </a>
+    </div>
+  </div>
+</div>

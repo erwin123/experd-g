@@ -1,0 +1,37 @@
+.row {
+    margin-top:-35px;
+}
+.row div{
+    margin: 5px;
+    font-size: 12px;
+    border-radius: 5px;
+    height: 60px;
+    text-align: center;
+    background: #fff;
+    -webkit-box-shadow: 0px 1px 1px 1px rgba(58, 58, 58, 0.3);
+    -moz-box-shadow: 0px 1px 1px 1px rgba(58, 58, 58, 0.3);
+    box-shadow: 0px 1px 1px 1px rgba(58, 58, 58, 0.3);
+
+    /* Internet Explorer 10 */
+    display:-ms-flexbox;
+    -ms-flex-pack:center;
+    -ms-flex-align:center;
+
+    /* Firefox */
+    display:-moz-box;
+    -moz-box-pack:center;
+    -moz-box-align:center;
+
+    /* Safari, Opera, and Chrome */
+    display:-webkit-box;
+    -webkit-box-pack:center;
+    -webkit-box-align:center;
+
+    /* W3C */
+    box-pack:center;
+    box-align:center;
+}
+
+.row div a{
+    color:#01573c;
+}

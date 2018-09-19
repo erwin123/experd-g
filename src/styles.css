@@ -1,1 +1,88 @@
-/* You can add global styles to this file, and also import other style files */
+html,body
+{
+    height:100%;
+}
+
+.btn-primary {
+    color: #fdfdfd !important;
+    border: none !important;
+    border-radius: 0px !important;
+    background: #486B58 !important;
+}
+
+.btn-danger{
+    border: none !important;
+}
+
+.row{
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+.btn-ctn {
+    margin: 0 !important;
+    padding: 0 !important;
+    text-align: left;
+    display: block;
+    width: 100%;
+    border: 0;
+    height: 45px;
+    outline: none;
+    text-decoration: none;
+    color: #fdfdfd !important;
+    line-height: 45px;
+    font-size: 20px;
+    text-transform: capitalize;
+    font-weight: bold;
+}
+
+.btn-ctn .arrow {
+    display: block;
+    float: left;
+    height: 45px;
+    text-align: center;
+    background: transparent;
+    color: #fdfdfd;
+    font-size: 1.5em;
+    width: 1em;
+    transition: margin 200ms;
+}
+
+.header-step {
+    display: block;
+    width: 100%;
+    background: #58A06E;
+    position: fixed;
+    z-index: 99;
+}
+
+.upload-btn-wrapper {
+    display: block;
+    width: 100%;
+    position: relative;
+}
+
+.btn-file {
+    display: block;
+    width: 85%;
+    border: none;
+    color: #fff;
+    background: #58A06E;
+    padding: 8px 20px;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 50px !important;
+}
+
+.upload-btn-wrapper input[type=file] {
+    font-size: 20px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}
+
+.upload-btn-wrapper button {
+    margin:10px auto;
+    font-size: 16px;
+}
