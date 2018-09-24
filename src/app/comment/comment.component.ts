@@ -3,6 +3,9 @@ import { Chat, Email } from '../model';
 import { ChatService } from '../services/chat.service';
 import { StatemanagementService } from '../services/statemanagement.service';
 import { MailerService } from '../services/mailer.service';
+import {forkJoin} from 'rxjs';
+import { join } from 'array-join';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-comment',
@@ -16,7 +19,8 @@ export class CommentComponent implements OnInit {
   empInfo: any;
   Chats: Chat[] = new Array();
   Chat: Chat = new Chat();
-  constructor(private mailer: MailerService, private chatService: ChatService, private stateService: StatemanagementService) { }
+  constructor(private mailer: MailerService, private chatService: ChatService,
+    private stateService: StatemanagementService, private userService:UserService) { }
 
   ngOnInit() {
     this.empInfo = this.stateService.getStoredEmployee();
@@ -24,17 +28,30 @@ export class CommentComponent implements OnInit {
   }
 
   getChat() {
-    this.chatService.getChat(this.empInfo.UserCode, this.DocType).subscribe(res => {
-      this.Chats = res.sort((a, b) => {
+    let q = forkJoin(this.chatService.getChat(this.empInfo.UserCode, this.DocType),this.userService.getUserAll());
+    q.subscribe(res=> {
+      this.Chats = join(res[0].sort((a, b) => {
         if (a.CreatedDate > b.CreatedDate) return -1;
         else if (a.CreatedDate < b.CreatedDate) return 1;
         else return 0;
-      });
+      }), res[1], { key1: "CreatedBy", key2: "Username" });
     }, err => {
       console.log("No data");
     }, () => {
 
-    });
+    })
+
+    // this.chatService.getChat(this.empInfo.UserCode, this.DocType).subscribe(res => {
+    //   this.Chats = res.sort((a, b) => {
+    //     if (a.CreatedDate > b.CreatedDate) return -1;
+    //     else if (a.CreatedDate < b.CreatedDate) return 1;
+    //     else return 0;
+    //   });
+    // }, err => {
+    //   console.log("No data");
+    // }, () => {
+
+    // });
   }
 
   onSubmit() {

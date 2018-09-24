@@ -50,3 +50,8 @@
 .checkbox input[type=checkbox]+label::before, .checkbox input[type=checkbox]+label::after{
     margin-top: 8px;
 }
+
+.coachy-container{
+    max-height: 70vh;
+    overflow-y: scroll;
+}

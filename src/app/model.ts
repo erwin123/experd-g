@@ -17,6 +17,7 @@ export class Chat{
     TheText:string;
     CreatedBy:string;
     CreatedDate:string;
+    Name:string;
 }
 
 export class User{

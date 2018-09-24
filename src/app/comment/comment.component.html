@@ -14,7 +14,7 @@
     <div class="col-sm-12 col-xs-12">
       <div *ngFor="let i of Chats">
         <div class="chat-sender-info">
-          <span class="chat-sender">{{i.CreatedBy}}</span> pada tanggal
+          <span class="chat-sender">{{i.Name}}</span> pada tanggal
           <span class="chat-date">{{i.CreatedDate | date: 'dd/MM/yyyy HH:mm:ss'}}</span>
         </div>
         <div class="chat-history">

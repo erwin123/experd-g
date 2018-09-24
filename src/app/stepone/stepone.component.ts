@@ -40,17 +40,18 @@ export class SteponeComponent implements OnInit {
     this.stateService.currentNumberProgrees.subscribe(res => {
       this.progress = res;
     });
-
+    this.empInfo = this.stateService.getStoredEmployee();
+    this.PUInfo = this.stateService.getStoredProject();
     let adm: any;
     adm = this.stateService.getStoredADM();
     if (adm) {
       this.isCoach = true;
+      this.PUInfo = this.stateService.getStoredSelectedProject();
     } else {
       this.myCoach = this.stateService.getStoredMyCoach();
     }
 
-    this.empInfo = this.stateService.getStoredEmployee();
-    this.PUInfo = this.stateService.getStoredProject();
+    
     this.getPi();
   }
 
