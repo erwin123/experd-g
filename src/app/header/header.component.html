@@ -36,6 +36,9 @@
     <a *ngIf="isLogin && isCoach && isProjectSelected" routerLink="/main/coachy" class="nav-link">
         <clr-icon shape="list" class="is-solid"></clr-icon> List Coach
     </a>
+    <a *ngIf="isLogin && isCoach" routerLink="/main/report" class="nav-link">
+        <clr-icon shape="line-chart" class="is-solid"></clr-icon> Report
+    </a>
     <a routerLink="/main/contact" class="nav-link">
         <clr-icon shape="phone-handset" class="is-solid" size="18"></clr-icon> Hubungi Kami
     </a>

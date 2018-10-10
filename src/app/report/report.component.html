@@ -1,0 +1,57 @@
+<div class="clr-row">
+  <div class="clr-col-12">
+    <form clrForm>
+      <label>Project</label>
+      <div class="select">
+        <select [ngModelOptions]="{standalone: true}" [(ngModel)]="project " (ngModelChange)="onProjectChange($event)">
+          <option *ngFor="let opt of selectPr" value="{{opt.ProjectCode}}">{{opt.Name}}</option>
+        </select>
+      </div>
+      <label for="selects">Coach</label>
+      <div class="select">
+        <select [ngModelOptions]="{standalone: true}" [(ngModel)]="coach " (ngModelChange)="onCoachChange($event)">
+          <option *ngFor="let opt of selects" value="{{opt.value}}">{{opt.text}}</option>
+        </select>
+      </div>
+      <div class="toggle-switch">
+        <input type="checkbox" name="toggle_1" id="toggle_1" [(ngModel)]="pageOn">
+        <label for="toggle_1">&nbsp;Show Paging </label>
+      </div>
+    </form>
+    <clr-datagrid>
+      <clr-dg-placeholder>We couldn't find any users!</clr-dg-placeholder>
+      <clr-dg-column [clrDgField]="'Name'" class="widthName">Name</clr-dg-column>
+      <clr-dg-column [clrDgField]="'OFP'" class="widthPi">OFP</clr-dg-column>
+      <clr-dg-column [clrDgField]="'SolutionCombine'" class="widthSo">Solution</clr-dg-column>
+      <clr-dg-column [clrDgField]="'ActionCombine'" class="widthAct">Act</clr-dg-column>
+
+      <clr-dg-row *clrDgItems="let data of rawData">
+        <clr-dg-cell class="widthName">{{data.Name}}</clr-dg-cell>
+        <clr-dg-cell class="widthPi"><span class="done" *ngIf="data.OFP !== '0'">
+            <clr-icon shape="check"></clr-icon>
+          </span><span class="not" *ngIf="data.OFP === '0'">
+            <clr-icon shape="times"></clr-icon>
+          </span></clr-dg-cell>
+        <clr-dg-cell class="widthSo"><span class="not" [class.done]="data.Solution1 !== '0'">{{data.Solution1 ==='0'?
+            'X':data.Solution1 }}</span>&nbsp;<span class="not" [class.done]="data.Solution2 !== '0'">{{data.Solution2
+            ==='0'?
+            'X':data.Solution2}}</span>&nbsp;<span class="not" [class.done]="data.Solution3 !== '0'">{{data.Solution3
+            ==='0'?
+            'X':data.Solution3}}</span></clr-dg-cell>
+        <clr-dg-cell class="widthAct"><span class="not" [class.done]="data.Action1 !== '0'">{{data.Action1 ==='0'?
+            'X':data.Action1}}</span>&nbsp;<span class="not" [class.done]="data.Action2 !== '0'">{{data.Action2 ==='0'?
+            'X':data.Action2}}</span>&nbsp;<span class="not" [class.done]="data.Action3 !== '0'">{{data.Action3 ==='0'?
+            'X':data.Action3}}</span></clr-dg-cell>
+      </clr-dg-row>
+      <clr-dg-footer>
+        <clr-dg-pagination #pagination [clrDgPageSize]="8" *ngIf="pageOn">
+          {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+          of {{pagination.totalItems}} rows
+        </clr-dg-pagination>
+      </clr-dg-footer>
+
+    </clr-datagrid>
+
+    <button class="btn btn-primary btn-block" (click)="exportData()">Export Data</button>
+  </div>
+</div>

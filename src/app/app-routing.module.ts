@@ -16,6 +16,7 @@ import { ProjectboardComponent } from './projectboard/projectboard.component';
 import { CoachyboardComponent } from './coachyboard/coachyboard.component';
 import { SummaryComponent } from './summary/summary.component';
 import { ContactComponent } from './contact/contact.component';
+import { ReportComponent } from './report/report.component';
 
 const appRoutes: Routes = [
   
@@ -33,6 +34,7 @@ const appRoutes: Routes = [
       { path: 'execthree', component: ExecthreeComponent, canActivate: [AuthguardService], data: { state: 'execthree' } },
       { path: 'chpwd', component: ChpwdComponent, canActivate: [AuthguardService] , data: { state: 'chpwd' }},
       { path: 'summary', component: SummaryComponent, canActivate: [AuthguardService] , data: { state: 'summary' }},
+      { path: 'report', component: ReportComponent, canActivate: [AuthguardService] , data: { state: 'report' }},
       { path: 'contact', component: ContactComponent , data: { state: 'contact' }},
   ]},
   //{ path: '', redirectTo: 'main/landing'},

@@ -9,6 +9,7 @@ var sl = require('../models/trx/solution');
 var us = require('../models/trx/user');
 var pu = require('../models/trx/projectuser');
 var cn = require('../models/trx/cnc');
+var rpt = require('../models/trx/report');
 
 var push = require('../models/trx/pushnotif');
 
@@ -597,6 +598,16 @@ router.delete('/push/:key', function (req, res, nrlt) {
 
 router.get('/pinger', function (req, res, nrlt) {
     res.json(1);
+});
+
+
+router.post('/rpt/', function (req, res, nrlt) {
+    if (req.body) {
+        rpt.getReportProgress(req.body, function (err, rows) {
+            if (err) { res.json(err); }
+            else { res.json(rows[0]); }
+        });
+    }
 });
 
 module.exports = router;

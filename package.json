@@ -42,6 +42,7 @@
     "express": "^4.16.3",
     "express-fileupload": "^0.4.0",
     "express-session": "^1.15.6",
+    "file-saver": "^2.0.0-rc.3",
     "hammerjs": "^2.0.8",
     "jsonwebtoken": "^8.3.0",
     "moment": "^2.22.2",
@@ -53,6 +54,7 @@
     "rxjs": "^6.0.0",
     "rxjs-compat": "^6.2.2",
     "web-push": "^3.3.2",
+    "xlsx": "^0.14.0",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {

@@ -4,7 +4,7 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { ClarityModule } from '@clr/angular';
+import { ClarityModule,ClrFormsNextModule } from '@clr/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './/app-routing.module';
 import { MainComponent } from './main/main.component';
@@ -39,6 +39,7 @@ import { CoachyboardComponent } from './coachyboard/coachyboard.component';
 import { SummaryComponent } from './summary/summary.component';
 import { ExecsummaryComponent } from './execsummary/execsummary.component';
 import { ContactComponent } from './contact/contact.component';
+import { ReportComponent } from './report/report.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { ContactComponent } from './contact/contact.component';
     CoachyboardComponent,
     SummaryComponent,
     ExecsummaryComponent,
-    ContactComponent
+    ContactComponent,
+    ReportComponent
   ],
   imports: [
     BrowserModule,
@@ -81,7 +83,8 @@ import { ContactComponent } from './contact/contact.component';
     BlockUIModule.forRoot(),
     PdfViewerModule,
     ToastrModule.forRoot(),
-    MyDatePickerModule
+    MyDatePickerModule,
+    ClrFormsNextModule
   ],
   providers: [AuthguardService, {provide: LocationStrategy, useClass:HashLocationStrategy}],
   bootstrap: [AppComponent]
