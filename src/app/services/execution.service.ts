@@ -14,7 +14,7 @@ export class ExecutionService {
   private url = globalVar.global_trx+"/ex";  // URL to web api
   constructor(private httpClient: HttpClient) { }
 
-  uploadPhoto(fileToUpload: File){
+  uploadDoc(fileToUpload: File){
     this.token = JSON.parse(localStorage.getItem('currentUser'));
     let _headers = new HttpHeaders().set('x-access-token', this.token.token);
     const formData: FormData = new FormData();

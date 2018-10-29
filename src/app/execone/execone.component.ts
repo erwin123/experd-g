@@ -24,14 +24,20 @@ export class ExeconeComponent implements OnInit {
   loadedPhoto: boolean = false;
   empInfo: any;
   PUInfo: any;
-  longAnswer: string = "Belum ada eksekusi";
+  longAnswer: string = "";
   ex: Array<Execution> = new Array();
   ex1: Execution = new Execution();
   isCoach: boolean = false;
   random: number = 0;
-  solution:Solution = new Solution();
+  solution: Solution = new Solution();
+
+  pdfSrc: string = globalVar.storagePdf;
+  page: number = 1;
+  totalPages: number = 0;
+  pdfFile: File = null;
+
   constructor(private router: Router, private stateService: StatemanagementService, private toastr: ToastrService
-    , private execService: ExecutionService, private loginService:LoginService, private solutionService:SolutionService) { }
+    , private execService: ExecutionService, private loginService: LoginService, private solutionService: SolutionService) { }
 
   ngOnInit() {
     this.empInfo = this.stateService.getStoredEmployee();
@@ -43,8 +49,11 @@ export class ExeconeComponent implements OnInit {
       this.isCoach = true;
     }
     this.random = Math.floor(Math.random() * 3) + 1;
-    console.log(this.random);
     this.getSolution();
+  }
+
+  afterLoadComplete(pdfData: any) {
+    this.totalPages = pdfData.numPages;
   }
 
   getEx() {
@@ -53,6 +62,7 @@ export class ExeconeComponent implements OnInit {
         this.ex1 = res[res.length - 1];
         this.longAnswer = this.ex1.Description;
       }
+      this.pdfSrc = this.pdfSrc + this.ex1.Filename;
 
       // if (res.length > 0) {
       //   this.ex.forEach((val, idx) => {
@@ -72,6 +82,7 @@ export class ExeconeComponent implements OnInit {
   getSolution() {
     this.solutionService.getSolutionActionOrder(this.empInfo.UserCode, this.step).subscribe(res => {
       this.solution = res;
+      console.log(res);
       let date = res.Deadline.split('T')[0];
       // let deadlineview: any = { date: { year: +date.split('-')[0], month: +date.split('-')[1], day: +date.split('-')[2] } };
       this.solution.Deadline = date;
@@ -81,53 +92,58 @@ export class ExeconeComponent implements OnInit {
       this.solution = new Solution();
     });
   }
-  // readURL(event: any): void {
-  //   if (event.target.files && event.target.files[0]) {
-  //     this.imgRwd = event.target.files[0];
-  //     const file = event.target.files[0];
 
-  //     const reader = new FileReader();
-  //     reader.onload = e => this.imageSrc = reader.result;
+  readUrl(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      this.pdfFile = event.target.files[0];
+      var reader = new FileReader();
+      reader.onload = (event: any) => {
+        this.pdfSrc = event.target.result;
+        if (this.pdfFile.name.split('.')[this.pdfFile.name.split('.').length - 1] !== 'pdf') {
+          this.pdfFile = null;
+          this.toastr.error('', 'Anda harus memilih file pdf');
+        }
+      }
 
-  //     reader.readAsDataURL(file);
-  //   }
-  // }
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  }
 
   onSubmit() {
-    if (this.longAnswer === "") {
-      this.toastr.warning('', 'Anda belum mengisi deskripsi eksekusi');
+    if (this.longAnswer === "" || this.pdfFile == null) {
+      this.toastr.warning('', 'Anda belum mengisi deskripsi eksekusi atau belum memilih dokumen');
       return;
     }
     this.stateService.setTraffic(true);
-    // this.execService.uploadPhoto(this.imgRwd).subscribe(event => {
+    this.execService.uploadDoc(this.pdfFile).subscribe(event => {
 
-    //   if (event.type === HttpEventType.UploadProgress) {
-    //     const percentDone = Math.round(100 * event.loaded / event.total);
-    //     if (percentDone < 95)
-    //       this.stateService.setProgress(percentDone);
-    //   }
-    //   let resultFilename: any;
+      if (event.type === HttpEventType.UploadProgress) {
+        const percentDone = Math.round(100 * event.loaded / event.total);
+        if (percentDone < 95)
+          this.stateService.setProgress(percentDone);
+      }
+      let resultFilename: any;
 
-    //   if (event instanceof HttpResponse) {
-    //     resultFilename = event.body;
-    let ex: Execution = new Execution();
-    ex.CreatedBy = this.empInfo.Username;
-    ex.Filename = "";
-    ex.ProjectCode = this.PUInfo.ProjectCode;
-    ex.UserCode = this.empInfo.UserCode;
-    ex.Description = this.longAnswer;
-    ex.Step = this.step;
-    ex.Complete = "0";
-    this.execService.postEx(ex).subscribe(res => {
-      console.log(res);
+      if (event instanceof HttpResponse) {
+        resultFilename = event.body;
+        let ex: Execution = new Execution();
+        ex.CreatedBy = this.empInfo.Username;
+        ex.Filename = resultFilename.filename;
+        ex.ProjectCode = this.PUInfo.ProjectCode;
+        ex.UserCode = this.empInfo.UserCode;
+        ex.Description = this.longAnswer;
+        ex.Step = this.step;
+        ex.Complete = "0";
+        this.execService.postEx(ex).subscribe(res => {
+          this.router.navigate(['main/stepboard']);
+          this.stateService.setTraffic(false);
+          this.toastr.success('', 'Dokumen berhasil tersimpan');
+        })
+
+      }
+    }, err => {
       this.stateService.setTraffic(false);
-      this.toastr.success('', 'Dokumen berhasil tersimpan');
-    })
-
-    //   }
-    // }, err => {
-    //   this.stateService.setTraffic(false);
-    //   this.toastr.error('', 'Terjadi kesalahan jaringan');
-    // });
+      this.toastr.error('', 'Terjadi kesalahan jaringan');
+    });
   }
 }

@@ -5,16 +5,14 @@
     <div class="card-block">
         <div class="card-text">
             <label *ngIf="solution.Solution">Solusi</label>
-            <textarea disabled="disabled" type="text" id="formFields_1" placeholder="Solusi" name="solusi"
-                [(ngModel)]="solution.Solution"></textarea>
+            <textarea disabled="disabled" type="text" id="formFields_1" placeholder="Solusi" name="solusi" [(ngModel)]="solution.Solution"></textarea>
             <label *ngIf="solution.Target">Target</label>
-            <textarea disabled="disabled" type="text" id="formFields_2" placeholder="Target" name="target"
-                [(ngModel)]="solution.Target"></textarea>
+            <textarea disabled="disabled" type="text" id="formFields_2" placeholder="Target" name="target" [(ngModel)]="solution.Target"></textarea>
             <!-- <input [disabled]="isCoach ? 'disabled' : null" type="text" id="formFields_1" placeholder="Solusi" name="solusi" [(ngModel)]="solution.Solution">
             <input [disabled]="isCoach ? 'disabled' : null" type="text" id="formFields_2" placeholder="Target" name="target" [(ngModel)]="solution.Target"> -->
-            <label *ngIf="solution.Deadline">Deadline</label><br/>
-            <input type="text" disabled="disabled" [(ngModel)]="solution.Deadline" placeholder="Deadline"/>
-            
+            <label *ngIf="solution.Deadline">Deadline</label><br />
+            <input type="text" disabled="disabled" [(ngModel)]="solution.Deadline" placeholder="Deadline" />
+
         </div>
     </div>
 </div>
@@ -29,13 +27,36 @@
         <img *ngIf="random === 3" src="../../assets/exec3.jpg">
     </div>
     <div class="card-block">
+        <div class="form" *ngIf="!isCoach">
+            <b><i>Upload action</i> berdasarkan solusi:</b>
+            <div class="upload-btn-wrapper">
+                <button class="btn-file" (click)="fileInput.click()">
+                    <clr-icon shape="upload" size="23"></clr-icon> Unggah Dokumen...
+                </button>
+                <input type="file" accept="application/pdf" #fileInput name="exfile" (change)="readUrl($event)" />
+            </div>
+        </div>
+
+        <div>
+            <pdf-viewer (after-load-complete)="afterLoadComplete($event)" [src]="pdfSrc" [show-all]="false"
+                [render-text]="false" style="display: block;" [fit-to-page]="true" [(page)]="page"></pdf-viewer>
+            <button type="button" class="btn btn-icon btn-primary" style="float: left;" (click)="page=page-1" *ngIf="page>1">
+                <clr-icon class="is-solid" shape="rewind"></clr-icon>
+            </button>
+            <span style="font-size: 9px; font-style: italic">Hal. {{page}} dari {{totalPages}}</span>
+            <button type="button" class="btn btn-icon btn-primary" style="float: right;" (click)="page=page+1" *ngIf="page<totalPages">
+                <clr-icon class="is-solid" shape="fast-forward"></clr-icon>
+            </button>
+        </div>
+        <br />
         <!-- <app-carousel *ngIf="imgs.length > 0" [banners]='imgs'></app-carousel> -->
         <!-- <div *ngIf="!isCoach"> -->
         <!-- <div class="upload-btn-wrapper">
-                <button class="btn-file" (click)="fileInput.click()">
-                    <clr-icon shape="upload" size="23"></clr-icon> Unggah Dokumen...</button>
-                <input type="file" accept="image/*" #fileInput name="exfile" (change)="readURL($event);" />
-            </div> -->
+            <button class="btn-file" (click)="fileInput.click()">
+                <clr-icon shape="upload" size="23"></clr-icon> Unggah Dokumen...
+            </button>
+            <input type="file" accept="pdf/*" #fileInput name="exfile" (change)="readURL($event);" />
+        </div> -->
 
         <!-- <div class="card-text" style="display: block; width: 100%; margin: 0 auto; margin-bottom: 5px;">
                 <img width="270" height="auto" style="display: block;margin:0 auto;" id="blah" [src]="imageSrc || 'https://imgplaceholder.com/270x150/e6e6e6/c4c4c4/glyphicon-picture'"

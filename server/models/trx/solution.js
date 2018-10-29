@@ -41,10 +41,12 @@ exports.insertSolution = function (Solution, done) {
 
 exports.updateSolution = function (key, Solution, done) {
     Solution.Deadline = dateFormat(Solution.Deadline, "yyyy-mm-dd h:MM:ss");
-    var values = [Solution.Solution, Solution.Target,Solution.Deadline,Solution.CreatedBy,Solution.UserCode,Solution.ProjectCode, Solution.Complete,,Solution.ActionOrder,key]
+    var values = [Solution.Solution, Solution.Target,Solution.Deadline,Solution.CreatedBy,Solution.UserCode,Solution.ProjectCode, Solution.Complete,Solution.ActionOrder,key]
+    console.log(Solution);
     db.get(db.trx, function (err, connection) {
         if (err) return done('Database problem')
         connection.query('UPDATE Solution SET Solution=?,Target=?,Deadline=?,ModifiedDate=NOW(),ModifiedBy=?,UserCode=?,ProjectCode=?, Complete=?, ActionOrder=? WHERE DocumentCode=?', values, function (err, result) {
+            
             connection.release();
             if (err) return done(err)
             done(null, result)

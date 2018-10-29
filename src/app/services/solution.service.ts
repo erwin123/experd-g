@@ -31,10 +31,10 @@ export class SolutionService {
     this.token = JSON.parse(localStorage.getItem('currentUser'));
     const headers = this._headers.append('x-access-token', this.token.token);
 
-    return this.httpClient.post<Solution>(this.url + '/cr', { UserCode: userCode, ActioNOrder:actionOrder }, { headers: headers })
+    return this.httpClient.post<Solution[]>(this.url + '/cr', { UserCode: userCode, ActioNOrder:actionOrder }, { headers: headers })
       .map(res => {
-        if (res[0]) {
-          return res[0];
+        if (res) {
+          return res[res.length-1];
         }
         throw new Error('Not Found');
       });

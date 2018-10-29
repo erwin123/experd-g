@@ -178,7 +178,7 @@ router.post('/ex/upload', function (req, res) {
     let ftype = file.mimetype.split('/')[1];
     file.name = uuidv1() + "." + ftype;
 
-    let storage = config.photoDoc;
+    let storage = config.pdf;
 
     file.mv(storage + file.name, function (err) {
         if (err)
@@ -478,7 +478,7 @@ router.post('/mailer/', function (req, res, next) {
         var email = require("emailjs");
         var server = email.server.connect({
             user: "erwin.ant@experd.com",
-            password: "Gondar@001",
+            password: "Sunter123",
             host: "smtp.gmail.com",
             ssl: true,
             tls: false
@@ -496,7 +496,7 @@ router.post('/mailer/', function (req, res, next) {
                     { data: messagemail.MessageBody, alternative: true }
                 ]
         }, function (err, message) {
-            console.log(err || message);
+            //console.log(err || message);
             if (err) { res.json(err); }
             else { res.json(message); }
         });
