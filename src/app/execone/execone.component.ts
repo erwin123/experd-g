@@ -42,12 +42,14 @@ export class ExeconeComponent implements OnInit {
   ngOnInit() {
     this.empInfo = this.stateService.getStoredEmployee();
     this.PUInfo = this.stateService.getStoredProject();
-    this.getEx();
+    
     let adm: any;
     adm = this.stateService.getStoredADM();
     if (adm) {
       this.isCoach = true;
+      this.PUInfo = this.stateService.getStoredSelectedProject();
     }
+    this.getEx();
     this.random = Math.floor(Math.random() * 3) + 1;
     this.getSolution();
   }
