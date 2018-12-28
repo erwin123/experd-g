@@ -23,6 +23,11 @@ export class ExecsummaryComponent implements OnInit {
   ngOnInit() {
     this.empInfo = this.stateService.getStoredEmployee();
     this.PUInfo = this.stateService.getStoredProject();
+    let adm: any;
+    adm = this.stateService.getStoredADM();
+    if (adm) {
+      this.PUInfo = this.stateService.getStoredSelectedProject();
+    }
     this.getEx();
   }
 
