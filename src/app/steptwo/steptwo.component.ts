@@ -31,6 +31,7 @@ export class SteptwoComponent implements OnInit {
   }
 
   getSolution() {
+    this.complete = false;
     this.solutionService.getSolutionUser(this.empInfo.UserCode).subscribe(res => {
       //this.solutions = res;
       for (let i = 0; i < 3; i++) {
@@ -95,6 +96,36 @@ export class SteptwoComponent implements OnInit {
         this.getSolution();
       })
 
+    })
+  }
+
+
+  onUnComplete() {
+    let so: Solution = new Solution();
+    for (let i = 0; i < 3; i++) {
+      if (this.solutions[i].DocumentCode) {
+        so = this.solutions[i];
+        break;
+      }
+    }
+
+    let adm: any;
+    adm = this.stateService.getStoredADM();
+    if (!so.DocumentCode) {
+      this.toastr.warning('', 'Belum ada solusi dan target dari Coachy');
+      return;
+    }
+
+    this.stateService.setTraffic(true);
+    so.Complete = "0";
+    so.CreatedBy = adm.Username;
+    this.solutionService.putSolution(so).subscribe(res => {
+      this.stateService.setTraffic(false);
+      this.toastr.success('', 'Step Solusi dan Target dari ' + this.empInfo.Name + ' sudah  di uncomplete.');
+      this.solutions = new Array<Solution>();
+      setTimeout(() => {
+        this.getSolution();
+      }, 1000);  
     })
   }
 

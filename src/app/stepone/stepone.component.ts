@@ -194,4 +194,25 @@ export class SteponeComponent implements OnInit {
       })
     })
   }
+
+  onUnComplete() {
+
+    let adm: any;
+    adm = this.stateService.getStoredADM();
+    if (!this.pi) {
+      this.toastr.warning('', 'Belum ada identifikasi masalah dari Coachy');
+      return;
+    }
+
+    this.stateService.setTraffic(true);
+    this.pi.Complete = "0";
+    this.pi.Commit ="";
+    this.pi.CreatedBy = adm.Username;
+    this.piService.putPi(this.pi).subscribe(res => {
+      this.stateService.setTraffic(false);
+        this.toastr.success('', 'Problem Identification Un Complete!');
+        this.longAnswerCommit = "";
+        this.getPi();
+    })
+  }
 }

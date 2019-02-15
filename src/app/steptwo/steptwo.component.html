@@ -9,6 +9,8 @@
     </div>
     <br/>
     <button *ngIf="isCoach" [disabled]="complete ? 'disabled' : null" class="btn btn-primary btn-icon btn-block" (click)="onComplete()"><clr-icon shape="check" size="26"></clr-icon>Complete</button>
+    
+    <button *ngIf="isCoach" [disabled]="complete ? null:'disabled'" class="btn btn-danger btn-icon btn-block" (click)="onUnComplete()"><clr-icon shape="undo" size="26"></clr-icon>unComplete</button>
     <br/>
   </div>
 </div>
